@@ -13,6 +13,7 @@ def main(all: bool = False):
         shutil.rmtree(__dirname / "_build", ignore_errors=True)
     subprocess.run("jb build .", shell=True)
     shutil.move(__dirname / "_build" / "html", __dirname / "docs")
+    shutil.copy(__dirname / ".nojekyll", __dirname / "docs" / ".nojekyll")
 
 
 if __name__ == "__main__":
