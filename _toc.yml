@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: Deep Multi-Task & Meta Learning
+  chapters:
+  - glob: _posts/multitask-meta-learning/**
+- caption: Continual Learning
+  chapters:
+  - glob: _posts/continual-learning/**
+
+
