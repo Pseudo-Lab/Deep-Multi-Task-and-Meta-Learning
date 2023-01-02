@@ -64,12 +64,12 @@ Karol Hausman 교수님은 폴란드 출신이라고 합니다. 고전적인 로
 
 위의 과정을 간단히 표기하기 위해, 다음과 같은 표기법(notation)을 사용한다고 합니다.
 
- $$o_t$$ - observation at time step t  
- $$a_t$$ - action at the time step t  
- $$\pi_\theta(a_t|o_t)$$ - probability of action $$a_t$$ given $$o_t$$  
- $$\pi_\theta(a_t|s_t)$$ - probability of action $$a_t$$ given $$s_t$$  
+ o_t - observation at time step t  
+ a_t - action at the time step t  
+ \pi_\theta(a_t|o_t) - probability of action a_t given o_t  
+ \pi_\theta(a_t|s_t) - probability of action a_t given s_t  
  
-이때, $$s_t$$에 대한 정책은, fully observable한 상황에서만 얻을 수 있다는 언급을 하고, 다음 장에서 이를 설명하고자 하였습니다.
+이때, s_t에 대한 정책은, fully observable한 상황에서만 얻을 수 있다는 언급을 하고, 다음 장에서 이를 설명하고자 하였습니다.
 
 ![slide 8](materials/Lec9_material/material_figs/15.PNG "Slide8")
 
@@ -133,7 +133,7 @@ finite horizon case(time 1~T)에서는 reward들을 1부터 T까지 sum up하는
 
 카롤 교수는 지도학습에서의 task는 x와 y의 data 분포, loss들을 묶어 task라고 했던 것을 다시 한 번 상기 시켜 줍니다.
 
-이때, 강화학습에서의 task는 조금의 항들이 더욱 붙는다고 합니다. state space $$S$$, action space $$A$$, initial state distribution $$p(s_1)$$, transition function $$p(s'|s,a), reward function $$r(s,a)$$.
+이때, 강화학습에서의 task는 조금의 항들이 더욱 붙는다고 합니다. state space S, action space A, initial state distribution p(s_1), transition function p(s'|s,a), reward function r(s,a).
 
 이는 사실 MDP이며, task의 의미론적 의미? 보다 많은 것을 담고 있다고 합니다.
 이 말은 => 같은 task처럼 보여도, 강화학습 안에서는, 다른 MDP를 가지고 있다면 다른 task라고 하네요 오....
@@ -144,7 +144,7 @@ finite horizon case(time 1~T)에서는 reward들을 1부터 T까지 sum up하는
 
 예를 들어, 첫 번째 사진 속 캐릭터 애니메이션에서는, 다른 동작들을 학습하기 위한 다른 태스크들을 얘기할 수 있다고 합니다. 이 경우에는, task들 끼리 reward function이 다르다고 합니다.
 
-두 번째 사진 속 캐릭터 에니메이션에서는, 옷들이 다르고, 옷들이 입혀져 있는 상태가 다르므로, initial state distribution $$p(s_1)$$과 $$p(s'|,s,a)$$가 다르다고 합니다.
+두 번째 사진 속 캐릭터 에니메이션에서는, 옷들이 다르고, 옷들이 입혀져 있는 상태가 다르므로, initial state distribution p(s_1)과 p(s'|,s,a)가 다르다고 합니다.
 
 세 번째로는, 3개의 다른 로봇들에서의 강화학습을 예로 들고 있습니다. 해당 예제에서는 동일한 reward 즉, 물체를 잡았을때 발생하는 reward만 동일한 채, 나머지 MDP의 모든 요소가 다른 task라고 하는 것 같습니다.
 
@@ -165,7 +165,7 @@ Multi-task RL에서의 목표는 이전에 본 것과 동일하다고 합니다.
 * language description
 * desired goal state
 
-또한, desired goal state $$z_i=s_g$$는 goal-conditioned RL에서 다룰 예정이라고 합니다.
+또한, desired goal state z_i=s_g는 goal-conditioned RL에서 다룰 예정이라고 합니다.
 * goal-conditioned RL에서, reward는 보통 state와 goal state사이의 거리의 음수 값으로 정의 되며, 거리 함수는 여러 형태가 될 수 있다고 합니다.
   - 유클리드 거리
   - sparse 0/1
@@ -208,7 +208,7 @@ on-policy RL에서는, 현재 policy로부터 얻어진 data distribution을 이
 
 이 장 부터는 policy gradient에 대해서 다룬다고 합니다. 또한 PG를 설명할 때는 on-policdy 기조를 유지한다고 합니다.
 
-이 장에서 익숙하지 않은 term인 $$\tau$$는 state와 action의 joint probability로부터 나온 궤적이며, 오른쪽 그림의 initial state로부터 쫙 뻗어나가는 궤적을 생각해 주시면 될 것 같습니다.
+이 장에서 익숙하지 않은 term인 \tau는 state와 action의 joint probability로부터 나온 궤적이며, 오른쪽 그림의 initial state로부터 쫙 뻗어나가는 궤적을 생각해 주시면 될 것 같습니다.
 
 그래서, 해당 parameter theta하에서의 얻어진 trajectory들 이내의 sum of rewards들의 기댓값을 최대로 하는 것이 목적 함수이며, 이를 만족하는 theta*를 찾는 것이 목표라고 합니다.
 
@@ -254,7 +254,7 @@ TBD
 
 ![slide 29](materials/Lec9_material/material_figs/43.PNG "Slide29")
 
-TBD
+55: 59
 
 ![slide 30](materials/Lec9_material/material_figs/44.PNG "Slide30")
 
@@ -317,29 +317,28 @@ Multi-task RL algorithm 측면에서, policy, Q function등 s를 이용하는 �
 
 ![slide 41](materials/Lec9_material/material_figs/55.PNG "Slide41")
 
-TBD
+이 장에서는 해당 Hindsight relabeling을 이용한 학습이 어떤 방식으로 이루어지는지에 대해서 설명을 수행하고 있습니다.
 
-![slide 42](materials/Lec9_material/material_figs/56.PNG "Slide42")
+1. 정책을 이용한 data 수집
+2. replay buffer D에 수집한 data D_k를 합치기
+3. hindsight relabeling수행
+  * 이때, relabel은 last state를 기존의 goal 대신 새로운 goal로써 가정하여 진행이 된다고 합니다. => 즉, 최종적으로 도착한 곳을 목적지로로 봐줄께! 느낌인 것 같습니다.
+4. 이렇게 업데이트된 replay buffer를 통해 policy를 업데이트
 
-TBD
+카롤 교수님은 이때, last state뿐만 아니라 어떤 state라도 pseudo goal이 될 수 있다고 합니다.
+
+이를 통해, 더욱 많은 경험들을 얻을 수 있으며, 탐험의 어려움이 완화 될 수 있다는 효과를 얘기해 주기도 하시는 것 같습니다.
 
 ![slide 43](materials/Lec9_material/material_figs/57.PNG "Slide43")
 
-TBD
+이 장에서는, multi-task RL에서 어떻게 relabeling이 가능할까에 대한 얘기를 다루는 것 같습니다.
 
-![slide 44](materials/Lec9_material/material_figs/58.PNG "Slide44")
+1. 정책을 이용한 data를 수집
+2. replay buffer D에 수집한 data D_k를 합치기
+3. hindsight relableing 수행
+  * experience를 task T_j에 대해서 relabeling. 이때 기존의 reward대신 task j의 reward r_j(s_t)를 적용.
+4. 이렇게 업데이트된 replay buffer를 통해 policy를 업데이트
 
-TBD
+task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-conditioned RL에서의 relabeling과 다른 것 같습니다!
 
-![slide 45](materials/Lec9_material/material_figs/59.PNG "Slide45")
-
-TBD
-
-![slide 46](materials/Lec9_material/material_figs/60.PNG "Slide46")
-
-TBD
-
-![slide 47](materials/Lec9_material/material_figs/62.PNG "Slide47")
-
-TBD
-
+카롤 교수님은 이때, 어떤 task T_j를 선택하는 것이 좋을지에 대한 전략에 대해서도 앞서 last state를 고를때 처럼 언급해 주시고 계십니다. 임의로? high reward를 얻은 친구로?.? 이와 관련하여 슬라이드의 논문 두 개를 언급해 주셨습니다.
