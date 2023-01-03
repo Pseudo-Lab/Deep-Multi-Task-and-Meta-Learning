@@ -37,11 +37,16 @@ Karol Hausman 교수님은 폴란드 출신이라고 합니다. 고전적인 로
 
 ![slide 4](materials/Lec9_material/material_figs/4.PNG "Slide4")
 
-강화학습은 이런 문제들을 해결하는 것을 노력한다고 합니다. 그리고, 모든 행동들이 실제로 long term 결과를 가져온다고 생각하고, 모델링을 하려고 한다고 합니다.
+강화학습은 이런 문제들을 해결하는 것을 노력한다고 합니다.
+* robotics: 연속적인 모터 제어
+* language & dialog: 연속적인 대화..ㅎ
+* autonomous driving: 연속적인 제어
+* business operaetion: 연속적인 의사결정...?
+* finance: 연속적인 구매/판매..?
+
+그리고, 모든 행동들이 실제로 long term 결과를 가져온다고 생각하고, 모델링을 하려고 한다고 합니다.
 
 그래서, 순차적 의사 결정 문제를 풀기에 좋은데, 어떤 행동이 미래에 어떻게 영향을 주는지, 미래 결정에 어떤 영향을 주는지 등등을 해결할 수 있다고 합니다.
-
-사진은 그 예시들인 것 같습니다.
 
 ![slide 5](materials/Lec9_material/material_figs/7.PNG "Slide5")
 
@@ -100,7 +105,7 @@ state는 어떻게 행동해야 할 지를 알기 위해 필요한 정보이며,
 
 이 함수는 state와 action에 의존 적이라고 하며, scalar value를 가지고 있다고 합니다.
 
-운전을 예로 들면, high reward는 안전한 운전을 의미하며, low reward는 사고 등 안좋은 운전을 의미한다고 예시로 들어 설명하고 있습니다.
+운전을 예로 들면, high reward는 안전한 운전을 하였을 때 피드백 받을 수 있는 값이며, low reward는 사고 등 안좋은 운전을 하였을 때 피드백 받는 값이이라고, 예시로 들어 설명하고 있습니다.
 
 ![slide 11](materials/Lec9_material/material_figs/20.PNG "Slide11")
 
@@ -177,7 +182,7 @@ Multi-task RL에서의 목표는 이전에 본 것과 동일하다고 합니다.
 강화학습 알고리즘은 일반적으로
 1. sample을 생성하는 단계,
 2. model이 return을 fit하는 단계,
-3. policdy를 improve하는 단계로 나뉜다고 합니다.
+3. policy를 improve하는 단계로 나뉜다고 합니다.
 
 2에서,
 모델이 return을 fit하는 단계에서, 현재 rollout의 모든 reward를 합치고, 이를 이용해 policy gradient를 수행하는 알고리즘이 MC policy gradient라고 합니다.
@@ -200,13 +205,13 @@ model-based는 다른 강의에서 다룬다고 하네요!
 
 이 장에서는 On-policy RL, Off-policy RL에 대해 다룬다고 합니다.
 
-on-policy RL에서는, 현재 policy로부터 얻어진 data distribution을 이용해서 정책을 학습시키는 알고리즘을 말하며, off-policdy는 다른 policy로부터 얻어진 data distribution을 이용해서도 정책을 학습 시킬 수 있는 알고리즘을 말하는 것 같습니다.
+on-policy RL에서는, 현재 policy로부터 얻어진 data distribution을 이용해서 정책을 학습시키는 알고리즘을 말하며, off-policy는 다른 policy로부터 얻어진 data distribution을 이용해서도 정책을 학습 시킬 수 있는 알고리즘을 말하는 것 같습니다.
 
 장점과 단점은 슬라이드에 잘 나와 있으며, 그 자체의 특성으로 부터 기인한 것이 많은 것 같습니다.
 
 ![slide 21](materials/Lec9_material/material_figs/32.PNG "Slide21")
 
-이 장 부터는 policy gradient에 대해서 다룬다고 합니다. 또한 PG를 설명할 때는 on-policdy 기조를 유지한다고 합니다.
+이 장 부터는 policy gradient에 대해서 다룬다고 합니다. 또한 PG를 설명할 때는 on-policy 기조를 유지한다고 합니다.
 
 이 장에서 익숙하지 않은 term인 \tau는 state와 action의 joint probability로부터 나온 궤적이며, 오른쪽 그림의 initial state로부터 쫙 뻗어나가는 궤적을 생각해 주시면 될 것 같습니다.
 
@@ -238,7 +243,7 @@ argmax 안쪽 term을 J(theta)로 표현하게 되면, 해당 J(theta)는 sampli
 
 이렇게 얻은 gradient를 ascent하는 방향으로 theta를 업데이트 하기만 하면 끝!
 
-다시 한 번, 3단계의 diagram을 가져와서, 해당 policdy gradient를 이용해 theta를 업데이트 시키는 REINFORCE algorithm을 설명합니다.
+다시 한 번, 3단계의 diagram을 가져와서, 해당 policy gradient를 이용해 theta를 업데이트 시키는 REINFORCE algorithm을 설명합니다.
 
 ![slide 25](materials/Lec9_material/material_figs/38.PNG "Slide25")
 
@@ -246,7 +251,7 @@ argmax 안쪽 term을 J(theta)로 표현하게 되면, 해당 J(theta)는 sampli
 
 이는 policy gradient의 식이 imitation learning에서 사용할 maximum likelihood와 유사하다는 것입니다.
 * 실제로 식을 보게 되면, t=1~T까지의 reward의 총합 즉 return term의 유무만이 차이임을 알 수 있습니다.
-* 그리하여, reward의 sum이 0이 되는 셋팅일 경우, imitation learning과 objective function이 정확히 같다는 것을 언급합니다.
+* 그리하여, reward의 sum이 1이 되는 셋팅일 경우, imitation learning과 objective function이 정확히 같다는 것을 언급합니다.
   - 그러면서, 이에 대한 물리적 의미? 를 current rollout에서 current policy가 항상 positive한 업데이트만 된다! 라는 얘기를 해 주었는데, 살짝 모호한 감이 있는 것 같습니다.
 * 또한, policy gradient에서 사용하는 objective function이 supervised learning에서 사용하는 그것과 비슷하다는 점은, 지도학습에서의 multi-task learning을 위한 개념들의 이식이 어렵지 않다는 뉘앙스의 이야기를 해 주셨습니다. 
 
@@ -270,7 +275,7 @@ trial - and - error를 통해 알아내자!
 단점
 * high-variance gradient를 산출한다.
   - reward의 총 합이 sample to sample이 아닌 trajectory to trajectory로 차이가 나기 때문으로 설명하는 것 같습니다.
-  - 이를 해결하기 위해, return에서 baseline을 빼는 일반적인 방법과, reward의 크기를 작게 만드는 방법 등이 있을것 같다고 얘기합니다. 언급하지는 않으셨지만, TRPO, PPO등 trust region내에서 업데이트를 하는 알고리즘도 슬라이드엔 표기가 되어 있는 것 같습니다.
+  - 이를 해결하기 위해, return에서 baseline을 빼는 일반적인 방법과, reward의 크기를 작게 만드는 방법 등이 있을것 같다고 얘기합니다. 언급하지는 않으셨지만, TRPO, PPO등 trust region내에서 업데이트를 하거나, 이전 정책과의 차이를 통해 penalty를 주는 알고리즘들도 슬라이드엔 표기가 되어 있는 것 같습니다.
 * on-policy dasta를 요구한다
   - 이는 gradient를 추정하기 위해, 기존의 experience를 재 사용하지 못 하는 것을 의미한다고 합니다.
   - Important sampling이 이를 일부 해결해 줄 수는 있지만, 이 역시 high variance가 발생할 수 있다고 합니다.
