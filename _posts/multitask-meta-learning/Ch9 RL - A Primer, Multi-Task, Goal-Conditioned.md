@@ -244,17 +244,40 @@ argmax 안쪽 term을 J(theta)로 표현하게 되면, 해당 J(theta)는 sampli
 
 이 장에서는 재미있는 사실에 대해서 카롤 교수님이 공유를 하고 싶었던 것 같습니다.
 
+이는 policy gradient의 식이 imitation learning에서 사용할 maximum likelihood와 유사하다는 것입니다.
+* 실제로 식을 보게 되면, t=1~T까지의 reward의 총합 즉 return term의 유무만이 차이임을 알 수 있습니다.
+* 그리하여, reward의 sum이 0이 되는 셋팅일 경우, imitation learning과 objective function이 정확히 같다는 것을 언급합니다.
+  - 그러면서, 이에 대한 물리적 의미? 를 current rollout에서 current policy가 항상 positive한 업데이트만 된다! 라는 얘기를 해 주었는데, 살짝 모호한 감이 있는 것 같습니다.
+* 또한, policy gradient에서 사용하는 objective function이 supervised learning에서 사용하는 그것과 비슷하다는 점은, 지도학습에서의 multi-task learning을 위한 개념들의 이식이 어렵지 않다는 뉘앙스의 이야기를 해 주셨습니다. 
+
 ![slide 26](materials/Lec9_material/material_figs/40.PNG "Slide26")
 
-TBD
+이 장에서 카롤 교수님은 짧게나마 각 과정에 대해 복습을 하는 시간을 가졌으며, 
+maximum likelihood와 policy gradient의 objective function의 형태가 비슷하기에, reward의 총 합이 높을 경우, 해당 action | state의 likelihood 값이 높아지도록 학습이 잘 되며, 총 합이 낮거나 0일 경우, 해당 action | state의 likelihood 값이 낮아지도록 학습 되는 것이라는 인사이트를 전달해 주셨습니다. 
+
+좋은 것은 더 좋게! 나쁜 것은 더 나쁘게!
+
+trial - and - error를 통해 알아내자!
 
 ![slide 27](materials/Lec9_material/material_figs/41.PNG "Slide27")
 
-TBD
+해당 장에서는 policy gradient에 대해서 요약해준다고 합니다.
+
+장점
+* 단순하다
+* 기존에 존재하는 muiti-task & meta-learning algorithm들과 결합이 쉽다
+
+단점
+* high-variance gradient를 산출한다.
+  - reward의 총 합이 sample to sample이 아닌 trajectory to trajectory로 차이가 나기 때문으로 설명하는 것 같습니다.
+  - 이를 해결하기 위해, return에서 baseline을 빼는 일반적인 방법과, reward의 크기를 작게 만드는 방법 등이 있을것 같다고 얘기합니다. 언급하지는 않으셨지만, TRPO, PPO등 trust region내에서 업데이트를 하는 알고리즘도 슬라이드엔 표기가 되어 있는 것 같습니다.
+* on-policy dasta를 요구한다
+  - 이는 gradient를 추정하기 위해, 기존의 experience를 재 사용하지 못 하는 것을 의미한다고 합니다.
+  - Important sampling이 이를 일부 해결해 줄 수는 있지만, 이 역시 high variance가 발생할 수 있다고 합니다.
 
 ![slide 29](materials/Lec9_material/material_figs/43.PNG "Slide29")
 
-이 장 부터는 Value-based RL에 대해서 다루려는 것 같습니다.
+이 장 부터 카롤 교수님께서는 Value-based RL에 대해서 다루려는 것 같습니다.
 
 Q-learning은 off-policy algorithm이라고 하며, 그렇기에, data를 많은 다른 정책들로부터 얻어낼 수 있다고 합니다.
 
@@ -282,29 +305,90 @@ Q 값을 이용하는 policy의 경우, Q를 가장 크게하는 action을 고�
 
 이 장에서는, bellman optimality equation의 concept을 이해하기 위해 카롤 교수님이 그린 그림들이 준비 되어 있습니다ㅎ
 
+그림 속 졸라맨은 악보를 잘 연주해야 하며, 1달 안에 연주를 하면 reward 1, 아니면 0을 받는다고 합니다.
+
+이때, 졸라맨의 action1은 휴식, action2는 드럼 비디오 시청, action3은 실제 드럼 연습이라고 합니다.
+
+현재 policy가 pi(a_1|s) = 1 즉, 휴식을 선택하는 것이라고 할 때, V^pi(s_t)는?!
+0이라고 합니다ㅎ
+action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0은 아니지만 낮은 값이고.. 하지만 a_3일때는 1근처라고 합니다! 재미있는 예시네용
+
 ![slide 32](materials/Lec9_material/material_figs/46.PNG "Slide32")
 
-58:50
+이 장 부터는 practical한 Q-learning algorithm 에 대해서 알아보겠다고 하십니다.
+
+카롤 교수님이 설명하실 알고리즘은 Fitted Q-iteration Algorithm이라고 합니다.
+해당 알고리즘은...
+1. 먼저 몇몇 정책을 이용해 dataset을 획득 (N size)
+2. y = r(s, a) + gamma max_a Q(s',a')의 target 값을 계산
+3. phi로 모수화된 Q(s,a)와 y의 차이를 최소화 시킬 수 있는 phi를 계산
+(2~3을 K 번 반복, S만큼의 gradient step을 반복)
+
+하는 과정으로 학습이 진행된다고 합니다.
+
+또한, multiple action을 다룸에 있어서, 해당 알고리즘은 multiple head구조를 지닌다고 합니다. (여러 아웃풋)
+
+그리하여, 결과로써 Q값을 최대화 하는 action을 고르는 greedy policy를 얻을 수 있다고 합니다.
+
+또한, 해당 알고리즘은 previous policy들로부터 sample을 reuse할 수 있다고 합니다. (off-policy algorithm)
+* 이때, sample을 관리하기 위해, 일반적으로 replay buffer를 사용한다고 합니다.
+
+해당 알고리즘은 policy gradient와 따르게 gradient descent algorithm이 아니라고 하며(pi 입장), multi-task RL과 goal conditioned RL로의 이식이 쉬운 알고리즘이라고 합니다!
+
+하지만 meta-learning으로의 확장은 어렵다고 하며, 뒤이어 설명한다고 하시네요!
 
 ![slide 33](materials/Lec9_material/material_figs/47.PNG "Slide33")
 
-TBD
+이 장에서는, 이전 연구이긴 하지만, Google에서 로봇을 이용해 했던 연구를 공유해 주셨습니다.
+
+또한, Q-learning을 이용해 continuous action space를 커버하기 위해, CEM이라고 하는, cross entropy method 알고리즘을 사용했다는 내용을 공유해 주셨습니다.
+* 이는 sampling 기반 최적화 알고리즘의 일종으로 보이며, 그림과 같이 1번 그림의 특정 표준 편차 내 표본을 샘플링 -> 평가 후 새로운 분포를 생성 -> 반복 의 과정을 통해 적절한 action을 선택하고자 하는 방법인 것 같습니다.
+* 나머지는 Q-learning과 유사한 것 같습니다!
 
 ![slide 34](materials/Lec9_material/material_figs/48.PNG "Slide34")
 
-TBD
+이 장에서는 Q-learning의 응용 버전인 QT-Opt에 대해서 설명해 주셨습니다.
+
+이 또한 google에서 한 연구라고 하시네요ㅎ 로봇의 grasping task를 학습하기 위해 사용된 알고리즘이라고 합니다.
+
+이 연구는 과거의 실험을 통해 얻어진 데이터들과 함께, on policy로 얻어진 data를 하나의 buffer에 저장하여 off-policy algorithm인 Q-learning의 장점을 십분 사용하고자 했던 알고리즘 같습니다.
+
+DeepMind에서 유사하게 과거 Atari 게임 시연 데이터를 buffer에 넣은 Deep Q-learning form Demonstration을 봤던 기억이 나네요!
 
 ![slide 35](materials/Lec9_material/material_figs/49.PNG "Slide35")
 
-TBD
+이 장에서는, 해당 QT-Opt를 통해 해결하고자 했던, Grasping task의 MDP formulation을 어떻게 했는지에 대해서 설명해 주고 계십니다.
+
+State: RGB camera로부터 얻어진 2D image(partial observability)
+
+Action: 4 자유도 pose 변화량 + gripper control 시그널
+
+Reward: binary reward 0/1 (Sparse, No shaping setting)
 
 ![slide 36](materials/Lec9_material/material_figs/50.PNG "Slide36")
 
-TBD
+그에 대한 결과는 다음과 같다고 합니다.
+
+총 7개의 로봇이 엄청나게 많은 데이터들을 몇 달 동안 수집하는 과정을 통했다고 하며, 그 결과, 학습에서 사용하지 않은 unseen object들도 96%의 성공률로 잡아냈다고 합니다. 몇 달이라... 한 번 실수하면 엄청 혼나겠군요
+
+강의에서는 3번 째 사진의 small ball을 잡는 과정에서 사람이 툭 볼을 치는데, 그래도 다시 잘 잡았다고 합니다ㅎ
 
 ![slide 37](materials/Lec9_material/material_figs/51.PNG "Slide37")
 
-TBD
+이 장에서는, Q-learning을 요약해 주셨습니다!
+
+장점
+* on-policy methods들에 비하여 더욱 sample 효율적이다.
+* fully offline setting에서 수집된 데이터를 포함하여, 모든 off-policy data를 통합하여 학습에 사용 가능
+* reward signal이 없더라도, policy을 업데이트 하는 것이 가능!
+  - policy gradient에서는 reward signal이 없으면 gradient 자체가 발생하지 않으므로 불 가능 했던 점이라고 합니다.
+* 병렬화가 on-policy methods들에 비해 용이하다고 합니다. 즉 여러 환경을 쉽게 사용 가능하다고 하는 것 같습니다.
+
+단점
+* standard meta-learning algorithm을 적용하는 것이 어렵다고 합니다.
+  - 왜냐하면, gradient 기반이 아닌, DP algorithm 기반의 loss function을 통해서 학습이 되기 때문이라고 합니다.
+* 학습을 "안정적으로" 하게 하기 위해서 많은 여러 "트릭"들이 필요하다고 합니다.
+* Q function을 학습하는 것은 단지 정책을 학습하는 것에 비해, 잠재적으로 조금 더 어려움이 존재한다고 합니다.
 
 ![slide 39](materials/Lec9_material/material_figs/53.PNG "Slide39")
 
