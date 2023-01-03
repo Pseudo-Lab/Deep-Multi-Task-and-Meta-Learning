@@ -242,7 +242,7 @@ argmax 안쪽 term을 J(theta)로 표현하게 되면, 해당 J(theta)는 sampli
 
 ![slide 25](materials/Lec9_material/material_figs/38.PNG "Slide25")
 
-49 : 35
+이 장에서는 재미있는 사실에 대해서 카롤 교수님이 공유를 하고 싶었던 것 같습니다.
 
 ![slide 26](materials/Lec9_material/material_figs/40.PNG "Slide26")
 
@@ -254,19 +254,37 @@ TBD
 
 ![slide 29](materials/Lec9_material/material_figs/43.PNG "Slide29")
 
-55: 59
+이 장 부터는 Value-based RL에 대해서 다루려는 것 같습니다.
+
+Q-learning은 off-policy algorithm이라고 하며, 그렇기에, data를 많은 다른 정책들로부터 얻어낼 수 있다고 합니다.
+
+본격적인 설명 이전에, 카롤 교수님은 몇몇 용어들에 대한 정의로 시작을 하시는 것 같습니다.
+
+Value function V^\pi(s_t)는 정책 pi 하에서, 현재 state로부터 시작해서 얻은 reward들의 총합을 표현하는 함수라고 합니다.
+* 이는 현재 policy 하에서 특정 state의 가치를 표현한다고 합니다.
+
+Q function Q^\pi(s_t, a_t)는 정책 pi 하에서, 현재 state에서 action으로 행동을 했을때 부터 얻은 reward들의 총합을 표현하는 함수라고 합니다.
+* 이는 현재 policy 하에서, 특정 state에서 특정 action을 선택하는 것의 가치를 표현한다고 합니다.
+
+또한, 그 둘은 3번째 식의 형태로 관계가 있다고 합니다. 즉 특정 상태 s_t에서 모든 행동에 대한 Q function의 기댓 값이 Value function이라는 것 같습니다.
+
+Q 값을 이용하는 policy의 경우, Q를 가장 크게하는 action을 고를 확률이 1이 되게끔 하는 것 같습니다.
 
 ![slide 30](materials/Lec9_material/material_figs/44.PNG "Slide30")
 
-TBD
+이 장에서는, 또 하나의 중요한 방정식에 대해서 설명한다고 합니다.
+
+그 전에 앞서 pi^star는 optimal policy, Q*는 optimal policy  pi^star하에서의 Q function 값이라고 하는 것 같습니다.
+
+이러한 optimal policy pi* 하에서는 3 번째 수식인 Bellmal optimality equation이 성립한다고 하며, Q-learning을 수행함에 있어서 이 수식을 이용하게 될 것이라고 합니다.
 
 ![slide 31](materials/Lec9_material/material_figs/45.PNG "Slide31")
 
-TBD
+이 장에서는, bellman optimality equation의 concept을 이해하기 위해 카롤 교수님이 그린 그림들이 준비 되어 있습니다ㅎ
 
 ![slide 32](materials/Lec9_material/material_figs/46.PNG "Slide32")
 
-TBD
+58:50
 
 ![slide 33](materials/Lec9_material/material_figs/47.PNG "Slide33")
 
