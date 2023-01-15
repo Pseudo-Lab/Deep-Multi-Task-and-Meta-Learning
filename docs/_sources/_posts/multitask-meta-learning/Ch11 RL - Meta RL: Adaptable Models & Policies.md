@@ -1,4 +1,4 @@
-# CS330 Lec11. Meta RL: Adaptable Models & Policies
+# Lec11. Meta RL: Adaptable Models & Policies
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [민예린 (Yerin Min)](https://www.linkedin.com/in/yerinmin/)  
@@ -91,7 +91,6 @@ Meta Learning은 크게 1) Black-box based, 2) Optimization based, non-parametri
 
 ![slide 12](materials/Lec11_material/material_figs/lec11_12.png "Slide12")
 Finn 교수님께서 본 논문의 contribution으로 강조하는 부분은 test time의 Episode 1에서 충분한 maze 탐색을 진행한 것 만으로 Episode 2에서는 바로 goal path를 찾는다는 것이었습니다.
-///
 <br/><br/>
 
 ### Example 2
