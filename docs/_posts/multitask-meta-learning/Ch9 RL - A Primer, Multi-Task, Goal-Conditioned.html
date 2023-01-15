@@ -364,7 +364,7 @@ title="Print to PDF"
 <blockquote>
 <div><p>Organization: 가짜연구소 (Pseudo Lab)<br />
 Editor: <a class="reference external" href="https://github.com/SeungeonBaek">백승언 (Seungeon Baek)</a><br />
-강의 자료: <span class="xref myst">CS330 2020 Fall</span><br />
+강의 자료: <a class="reference external" href="http://cs330.stanford.edu/fall2020/slides/cs330_rl_gc_mt_karol.pdf">CS330 2020 Fall</a><br />
 강의 영상: <a class="reference external" href="https://www.youtube.com/watch?v=WK9mi2ZDtg4&amp;list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;index=8">Youtube</a><br />
 강의 보조 자료: <a class="reference external" href="https://arxiv.org/abs/1707.01495">HER</a><br />
 강의 보조 자료 리뷰: <a class="reference external" href="https://ropiens.tistory.com/136">HER 리뷰</a></p>
@@ -727,7 +727,7 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
 <li><p>강의에서 Multi-task rl나 goal-conditioned rl에 대해 얘기할 때 HER(hindsight experience replay)에 대한 언급이 있는데, multi-task와 goal-condition에서 HER이 어떤 방식으로 사용이 되는 건가요?
 제가 단편적으로 이해하는 her는 sparse reward가 존재할 때 효과적으로 학습할 수 있는 알고리즘(또는 방법)이어서 HER의 아이디어를 어떤식으로 결합하여 활용하는지 궁금합니다!
 마침 <a class="reference external" href="https://ropiens.tistory.com/136">승언님께서 예전에 HER에 대해 리뷰한 게시글</a>을 찾았기 때문에 다른 분들보다 더 정확하게 알고 계시지 않을까 싶어요!! =&gt; 가볍게 생각해 본다면 s’와 s의 distance를 reward에 활용하는 부분인가 싶기도 합니다
-<img alt="Q&amp;A Image 1" src="_posts/multitask-meta-learning/materials/Lec9_material/QnA%20figs/1.png" /></p>
+<img alt="Q&amp;A Image 1" src="../../_images/1.png" /></p>
 <ul>
 <li><p>승언: 부끄럽게도 완벽히 이해한 상황은 아니지만, 제가 이해한 선에서 한 번 설명을 드려보겠습니다!</p>
 <ul>
@@ -740,7 +740,7 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
 </li>
 <li><p>동일한 MDP에서 robot 종류만 달라도 multi-task로 볼 수 있는 거 같은데 제가 이해한 게 맞을까요?
 만약 그렇다면 offline bin packing 문제에서 동일 MDP 내에 task indicator를 추가하면 multi task rl이라고 정의할 수 있을까요? (쌓을 물건의 조합을 미리 알고 있는 경우로 예를 들어 task 1 : A, B, C type,  task 2 : D, E type, task 3 : A, D type 등) =&gt; 제가 지금 풀고 있는 문제가 muti-task 였나 .. 싶어서 여쭤봅니다 ㅎㅎ
-<img alt="Q&amp;A Image 2" src="_posts/multitask-meta-learning/materials/Lec9_material/QnA%20figs/2.png" /></p>
+<img alt="Q&amp;A Image 2" src="../../_images/2.png" /></p>
 <ul>
 <li><p>승언: 1) robot 종류가 다를 경우, 로봇의 역학 식이 달라져 input ⇒ output 궤적이 달라질 것 같아서 transition function P가 다르고, 이는 다른 MDP이기 때문에, 강의에 따르면 MDP가 다르면 multi-task라고 하는 것으로 저는 이해를 했던 것 같습니다! 쓰고보니 비문같네요 2) 저도 제 문제에 대해, 유사한 생각을 하고 있어서 맞지 않을까 싶습니다ㅎㅎㅎ task indicator가 추가 되고, 물건이 바뀌면 state space S와 transition function P가 달라지는 느낌 아닐까 싶어요! 아닌가… 조금 어렵네요 task indicator가 추가 된다고 해도 one-hot encoding이면 state space S는 같을 것 같기도 하고… =&gt; task identifier를 추가하면 state space가 달라지므로 MDP가 달라질 수 있습니다다. (범진님)</p></li>
 </ul>
@@ -758,7 +758,7 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
 <ul>
 <li><p>승언: Imitation learning의 경우, state라는 input에 대해 pi(a|s)라고 하는 분포를 학습하는 지도학습 문제로 볼 수 있기에, MLE로 목적 함수를 모델링 할 수 있는 것 같습니다. 그렇게 보았을 때, policy gradient term과 밑의 사진처럼 sum of reward의 곱만 수식적인 차이가 나기 때문에, 만약 sum of reward가 1인 강화학습이면 imitation learning과 수식적으로 같다..? 정도인 것 같습니다….</p></li>
 <li><p>다른 논문을 참고해보니, MLE 즉 모방학습은 return이 1이어서 training data를 넘어서는 학습이 어렵다 라고 하네요. 흠..
-<img alt="Q&amp;A Image 3" src="_posts/multitask-meta-learning/materials/Lec9_material/QnA%20figs/3.png" /></p></li>
+<img alt="Q&amp;A Image 3" src="../../_images/3.png" /></p></li>
 </ul>
 </li>
 </ul>
@@ -777,7 +777,7 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
 </ul>
 </li>
 <li><p>Action의 Space가 연속적이라면, 게다가 벡터의 형태를 가질 경우는 Policy Network를 어떻게 구현해야 할까요?
-<img alt="Q&amp;A Image 4" src="_posts/multitask-meta-learning/materials/Lec9_material/QnA%20figs/4.PNG" /></p></li>
+<img alt="Q&amp;A Image 4" src="../../_images/42.PNG" /></p></li>
 <li><p>강의에 소개되지 않았지만 더 추가적으로 언급하고 싶은 강화학습 메서드들이 있으실까요?</p>
 <ul>
 <li><p>승언: 먼저, Goal-conditioned RL의 이론적 근거가 되는, 즉 goal을 state의 일부로써 생각할 수 있게 만들어준 UVFA(Universal Value Function Approximation)논문을 읽으면 좋을 것 같다는 생각이 듭니다. 추가적으로 언급하고 싶은 메서드로는, 강의에서는 소개되지 않았지만, HER에서 한 발 더 나아간, 변화하는 Goal을 다루는(Dynamic goal) DHER 알고리즘이 있을 것 같습니다. 해당 논문을 읽으려던 차에, 이직으로 인해 Dynamic Goal을 다룰 일이 없어져, 저는 읽지 않은 논문이지만, 로봇 팔 제어 등 Goal-conditioned RL 문제를 푸셔야 하는 분들께는 이동하는 목표를 학습할 수 있는 좋은 메서드가 되지 않을까 생각이 됩니다</p></li>
@@ -789,7 +789,7 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
 <ul class="simple">
 <li><p>goal-state가 여러 개가 존재한다면 여러 개의 goal-state에 의해서 multi-task 문제로 표현되는 걸까요?</p></li>
 </ul>
-<p><img alt="Q&amp;A Image 5" src="_posts/multitask-meta-learning/materials/Lec9_material/QnA%20figs/5.PNG" /></p>
+<p><img alt="Q&amp;A Image 5" src="../../_images/5.PNG" /></p>
 <ul class="simple">
 <li><p>승언 : (추가) 흠.. 강의를 다시 보니, task identifier z_i의 종류 중 하나로 goal state를 사용한 것을 보면 multi-goal이면 multi-task인 것 같기도 하네요ㅠ 도움!!</p></li>
 </ul>

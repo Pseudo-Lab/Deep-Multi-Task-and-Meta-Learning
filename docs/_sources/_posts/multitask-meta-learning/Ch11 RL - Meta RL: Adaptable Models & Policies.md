@@ -1,7 +1,7 @@
 # CS330 Lec11. Meta RL: Adaptable Models & Policies
 
 >Organization: 가짜연구소 (Pseudo Lab)  
->Editor: [민예린 (Yerin Min)](www.linkedin.com/in/yerinmin)  
+>Editor: [민예린 (Yerin Min)](https://www.linkedin.com/in/yerinmin/)  
 >강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_metarl1_2020.pdf)  
 >강의 영상: [Youtube](https://youtu.be/TPNs9sNNQwc)
 

@@ -2,7 +2,7 @@
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [백승언 (Seungeon Baek)](https://github.com/SeungeonBaek)  
->강의 자료: [CS330 2020 Fall](materials/Lec9_material/cs330_rl_gc_mt_karol.pdf)  
+>강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_rl_gc_mt_karol.pdf)  
 >강의 영상: [Youtube](https://www.youtube.com/watch?v=WK9mi2ZDtg4&list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&index=8)  
 > 강의 보조 자료: [HER](https://arxiv.org/abs/1707.01495)  
 > 강의 보조 자료 리뷰: [HER 리뷰](https://ropiens.tistory.com/136)  
@@ -462,7 +462,7 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
   - 강의에서 Multi-task rl나 goal-conditioned rl에 대해 얘기할 때 HER(hindsight experience replay)에 대한 언급이 있는데, multi-task와 goal-condition에서 HER이 어떤 방식으로 사용이 되는 건가요?
   제가 단편적으로 이해하는 her는 sparse reward가 존재할 때 효과적으로 학습할 수 있는 알고리즘(또는 방법)이어서 HER의 아이디어를 어떤식으로 결합하여 활용하는지 궁금합니다!
   마침 [승언님께서 예전에 HER에 대해 리뷰한 게시글](https://ropiens.tistory.com/136)을 찾았기 때문에 다른 분들보다 더 정확하게 알고 계시지 않을까 싶어요!! => 가볍게 생각해 본다면 s’와 s의 distance를 reward에 활용하는 부분인가 싶기도 합니다
-  ![Q&A Image 1](materials/Lec9_material/QnA%20figs/1.png)  
+  ![Q&A Image 1](materials/Lec9_material/QnAfigs/1.png)  
     + 승언: 부끄럽게도 완벽히 이해한 상황은 아니지만, 제가 이해한 선에서 한 번 설명을 드려보겠습니다!
       * 로보틱스에서 많이 사용되는 Goal-conditioned RL에서는 말씀하신대로 획득한 trajectory가 goal state g에 도달하지 않았더라도, 1) trajectory내 임의의 혹은 최종 state s_T를 goal position으로 가정. 2) 해당 state s_T와의 거리의 음수를 새로운 reward 함수로 정의 3) 획득한 trajectory의 sparse reward( 도달 못 했으므로 r_t = 0 )을 dense reward( r_t = |s_T - s| )로 바꿔서 재 저장 하는 방법을 주로 쓰는 것 같습니다.
       * multi-task rl에서 얘기하는 HER은 제가 읽었던 논문의 후속 논문에서 나온 내용을 강의에서 해주신 것 같으며, 강의의 앞 단에서 “RL에서의 task는 하나의 MDP다!”라는 설명을 해주셨는데, task가 다르다는 것에는 MDP 요소 중 하나인 reward가 다르다는 것을 포함하는 것 같습니다.
@@ -470,7 +470,7 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
   
   - 동일한 MDP에서 robot 종류만 달라도 multi-task로 볼 수 있는 거 같은데 제가 이해한 게 맞을까요?
   만약 그렇다면 offline bin packing 문제에서 동일 MDP 내에 task indicator를 추가하면 multi task rl이라고 정의할 수 있을까요? (쌓을 물건의 조합을 미리 알고 있는 경우로 예를 들어 task 1 : A, B, C type,  task 2 : D, E type, task 3 : A, D type 등) => 제가 지금 풀고 있는 문제가 muti-task 였나 .. 싶어서 여쭤봅니다 ㅎㅎ
-  ![Q&A Image 2](materials/Lec9_material/QnA%20figs/2.png)  
+  ![Q&A Image 2](materials/Lec9_material/QnAfigs/2.png)  
     + 승언: 1) robot 종류가 다를 경우, 로봇의 역학 식이 달라져 input ⇒ output 궤적이 달라질 것 같아서 transition function P가 다르고, 이는 다른 MDP이기 때문에, 강의에 따르면 MDP가 다르면 multi-task라고 하는 것으로 저는 이해를 했던 것 같습니다! 쓰고보니 비문같네요 2) 저도 제 문제에 대해, 유사한 생각을 하고 있어서 맞지 않을까 싶습니다ㅎㅎㅎ task indicator가 추가 되고, 물건이 바뀌면 state space S와 transition function P가 달라지는 느낌 아닐까 싶어요! 아닌가… 조금 어렵네요 task indicator가 추가 된다고 해도 one-hot encoding이면 state space S는 같을 것 같기도 하고… => task identifier를 추가하면 state space가 달라지므로 MDP가 달라질 수 있습니다다. (범진님)
   
   - 그리고 승언님이 지금 풀고 계시는 문제를 multi-task rl로 formulate 하면 as is -> to be가 어떻게 될지도 궁금합니다!
@@ -480,7 +480,7 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
   - Imitation learning이  reward 가 1 인 강화학습인 이유는 무엇인가요?
     + 승언: Imitation learning의 경우, state라는 input에 대해 pi(a|s)라고 하는 분포를 학습하는 지도학습 문제로 볼 수 있기에, MLE로 목적 함수를 모델링 할 수 있는 것 같습니다. 그렇게 보았을 때, policy gradient term과 밑의 사진처럼 sum of reward의 곱만 수식적인 차이가 나기 때문에, 만약 sum of reward가 1인 강화학습이면 imitation learning과 수식적으로 같다..? 정도인 것 같습니다….
     + 다른 논문을 참고해보니, MLE 즉 모방학습은 return이 1이어서 training data를 넘어서는 학습이 어렵다 라고 하네요. 흠..
-    ![Q&A Image 3](materials/Lec9_material/QnA%20figs/3.png)  
+    ![Q&A Image 3](materials/Lec9_material/QnAfigs/3.png)  
   
 * 이홍규
   - 왜 on-policy 메서드에서는 HER 트릭을 사용할 수 없을까요?
@@ -490,7 +490,7 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
       * SIL은 내가 이렇게 했을 때 잘했었잖어~ 인 것 같습니다.
   
   - Action의 Space가 연속적이라면, 게다가 벡터의 형태를 가질 경우는 Policy Network를 어떻게 구현해야 할까요?
-    ![Q&A Image 4](materials/Lec9_material/QnA%20figs/4.PNG)  
+    ![Q&A Image 4](materials/Lec9_material/QnAfigs/4.PNG)  
   
   - 강의에 소개되지 않았지만 더 추가적으로 언급하고 싶은 강화학습 메서드들이 있으실까요?
     + 승언: 먼저, Goal-conditioned RL의 이론적 근거가 되는, 즉 goal을 state의 일부로써 생각할 수 있게 만들어준 UVFA(Universal Value Function Approximation)논문을 읽으면 좋을 것 같다는 생각이 듭니다. 추가적으로 언급하고 싶은 메서드로는, 강의에서는 소개되지 않았지만, HER에서 한 발 더 나아간, 변화하는 Goal을 다루는(Dynamic goal) DHER 알고리즘이 있을 것 같습니다. 해당 논문을 읽으려던 차에, 이직으로 인해 Dynamic Goal을 다룰 일이 없어져, 저는 읽지 않은 논문이지만, 로봇 팔 제어 등 Goal-conditioned RL 문제를 푸셔야 하는 분들께는 이동하는 목표를 학습할 수 있는 좋은 메서드가 되지 않을까 생각이 됩니다
@@ -498,6 +498,6 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
  * 채지훈
     - goal-state가 여러 개가 존재한다면 여러 개의 goal-state에 의해서 multi-task 문제로 표현되는 걸까요?
   
-    ![Q&A Image 5](materials/Lec9_material/QnA%20figs/5.PNG)  
+    ![Q&A Image 5](materials/Lec9_material/QnAfigs/5.PNG)  
 
     + 승언 : (추가) 흠.. 강의를 다시 보니, task identifier z_i의 종류 중 하나로 goal state를 사용한 것을 보면 multi-goal이면 multi-task인 것 같기도 하네요ㅠ 도움!!
