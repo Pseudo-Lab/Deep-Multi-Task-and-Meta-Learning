@@ -1,4 +1,4 @@
-# Lec9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+# 9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [백승언 (Seungeon Baek)](https://github.com/SeungeonBaek)  

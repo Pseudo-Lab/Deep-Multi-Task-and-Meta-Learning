@@ -6,56 +6,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Lect 10 Model-Based RL &#8212; 멀티태스크/메타러닝 초읽기</title>
+    <title>10 Lecture. Model-Based RL &#8212; 멀티태스크/메타러닝 초읽기</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Lec11. Meta RL: Adaptable Models &amp; Policies" href="../Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html" />
-    <link rel="prev" title="인트로" href="../../../intro.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11 Lecture. Meta RL: Adaptable Models &amp; Policies" href="Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html" />
+    <link rel="prev" title="인트로" href="../../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -90,19 +90,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../index.html">
+    <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../../_static/PseudoLab_logo.png" class="logo" alt="logo">
+      <img src="../../_static/PseudoLab_logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">멀티태스크/메타러닝 초읽기</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -110,7 +110,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../../../intro.html">
+                <a class="reference internal" href="../../intro.html">
                     인트로
                 </a>
             </li>
@@ -123,17 +123,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Lect 10 Model-Based RL
+   10 Lecture. Model-Based RL
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html">
-   Lec11. Meta RL: Adaptable Models &amp; Policies
+  <a class="reference internal" href="Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html">
+   11 Lecture. Meta RL: Adaptable Models &amp; Policies
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Ch9%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html">
-   Lec9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+  <a class="reference internal" href="Ch9%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html">
+   9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
   </a>
  </li>
 </ul>
@@ -226,7 +226,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning/issues/new?title=Issue%20on%20page%20%2F_posts/multitask-meta-learning/Ch10 RL - Model-Based Reinforcement Learning/index.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning/issues/new?title=Issue%20on%20page%20%2F_posts/multitask-meta-learning/Ch10 Model-Based RL.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -254,7 +254,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/_posts/multitask-meta-learning/Ch10 RL - Model-Based Reinforcement Learning/index.md"
+        <a href="../../_sources/_posts/multitask-meta-learning/Ch10 Model-Based RL.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -347,7 +347,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lect 10 Model-Based RL</h1>
+                <h1>10 Lecture. Model-Based RL</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -392,9 +392,15 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="lect-10-model-based-rl">
-<h1>Lect 10 Model-Based RL<a class="headerlink" href="#lect-10-model-based-rl" title="Permalink to this headline">#</a></h1>
-<p>저자 : 이홍규</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-model-based-rl">
+<h1>10 Lecture. Model-Based RL<a class="headerlink" href="#lecture-model-based-rl" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div><p>Organization: 가짜연구소 (Pseudo Lab)<br />
+Editor: 이홍규<br/>
+강의 자료: <a class="reference external" href="http://cs330.stanford.edu/fall2020/slides/cs330_mbrl_2020.pdf">CS330 2020 Fall</a><br />
+강의 영상: <a class="reference external" href="https://youtu.be/LGhVQ3NB9h4">Youtube</a>
+<br/><br/></p>
+</div></blockquote>
 <section id="id1">
 <h2>개요<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -434,7 +440,7 @@ f_\phi(s, a) = p(s'|s,a)
 <li><p>해당 모델을 통해 <span class="math notranslate nohighlight">\(f_\phi(s, a)\)</span>, 최적의 액션 시퀀스를 산출합니다.</p></li>
 </ol>
 </div>
-<p><img alt="image-20230107040313664" src="../../../_images/image-20230107040313664.png" /></p>
+<p><img alt="slide 1" src="../../_images/lec10_1.png" /></p>
 <p><a class="reference external" href="https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;t=1749">source</a></p>
 <ul class="simple">
 <li><p>하지만 아무리 실제환경을 잘 피팅했다고 해도 <mark>모델에는 어느 정도의 오차가 존재합니다. </mark></p></li>
@@ -442,7 +448,7 @@ f_\phi(s, a) = p(s'|s,a)
 <li><p>이와 같은 문제의 경우, 모델이 생성한 데이터를 다시 모델 피팅에 사용함으로써 어느 정도 완화할 수 있습니다.</p></li>
 <li><p>해당 알고리즘은 <strong>MPC</strong>(model-predictive control)라고 불립니다.</p></li>
 </ul>
-<p><img alt="image-20230107043633901" src="../../../_images/image-20230107043633901.png" /></p>
+<p><img alt="slide 2" src="../../_images/lec10_2.png" /></p>
 <p><a class="reference external" href="https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;t=1913">source</a></p>
 <div class="note admonition">
 <p class="admonition-title">Peudo-Code</p>
@@ -484,7 +490,7 @@ r_i(s,a)\}
 <p class="admonition-title">Example</p>
 <p>예를 들어 스테이크를 굽는 로봇을 구현한다고 가정합시다. 스테이크가 완전히 속까지 익을 정도로 구어졌다면, 레어로 굽는 태스크에서는 리워드가 마이너스 혹은 0이겠지만, 웰던으로 굽는 태스크에서는 좋은 리워드를 받을 것입니다.</p>
 </div>
-<p><img alt="image-20230109110949479" src="../../../_images/image-20230109110949479.png" /></p>
+<p><img alt="slide 3" src="../../_images/lec10_3.png" /></p>
 <p><a class="reference external" href="https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;t=2006">source</a></p>
 <ul class="simple">
 <li><p>각 태스크별로 reward function의 형태를 알고 있는 경우, 해당 reward function에 기반해, 해당 태스크에 맞게, 액션을 플래닝하면 될 것입니다.</p></li>
@@ -569,7 +575,7 @@ s_i \leftarrow g_\text{enc}(o_i;~\theta_\text{enc}) \\
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./_posts/multitask-meta-learning/Ch10 RL - Model-Based Reinforcement Learning"
+            path: "./_posts/multitask-meta-learning"
         },
         predefinedOutput: true
     }
@@ -583,17 +589,17 @@ s_i \leftarrow g_\text{enc}(o_i;~\theta_\text{enc}) \\
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../../../intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">인트로</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html" title="next page">
+    <a class='right-next' id="next-link" href="Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lec11. Meta RL: Adaptable Models &amp; Policies</p>
+        <p class="prev-next-title">11 Lecture. Meta RL: Adaptable Models &amp; Policies</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -618,7 +624,7 @@ s_i \leftarrow g_\text{enc}(o_i;~\theta_\text{enc}) \\
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
   </body>

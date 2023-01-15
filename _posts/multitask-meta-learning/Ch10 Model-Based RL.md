@@ -1,9 +1,10 @@
-# Lect 10 Model-Based RL
+# 10 Lecture. Model-Based RL
 
-저자 : 이홍규
-
-
-
+>Organization: 가짜연구소 (Pseudo Lab)  
+>Editor: 이홍규<br/>
+>강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_mbrl_2020.pdf)  
+>강의 영상: [Youtube](https://youtu.be/LGhVQ3NB9h4)
+<br/><br/>
 ## 개요
 
 * Model-based RL의 주된 모티베이션은 **충분한 양의 데이터 확보**입니다.
@@ -44,7 +45,7 @@ $$
 :::
 
 
-![image-20230107040313664](image-20230107040313664.png)
+![slide 1](materials/Lec10_material/material_figs/lec10_1.png "Slide1")
 
 [source](https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&t=1749)
 
@@ -53,7 +54,7 @@ $$
 * 이와 같은 문제의 경우, 모델이 생성한 데이터를 다시 모델 피팅에 사용함으로써 어느 정도 완화할 수 있습니다.
 * 해당 알고리즘은 **MPC**(model-predictive control)라고 불립니다.
 
-![image-20230107043633901](image-20230107043633901.png)
+![slide 2](materials/Lec10_material/material_figs/lec10_2.png "Slide2")
 
 [source](https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&t=1913)
 
@@ -103,7 +104,7 @@ $$
 :::
 
 
-![image-20230109110949479](image-20230109110949479.png)
+![slide 3](materials/Lec10_material/material_figs/lec10_3.png "Slide3")
 
 [source](https://youtu.be/LGhVQ3NB9h4?list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&t=2006)
 
