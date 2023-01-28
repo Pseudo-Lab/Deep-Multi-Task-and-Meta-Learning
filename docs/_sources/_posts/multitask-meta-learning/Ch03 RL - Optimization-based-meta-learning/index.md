@@ -1,9 +1,9 @@
-# 4 Lecture. Optimization-based Meta Learning (MAML)
+# Lecture 4. Optimization-based Meta Learning (MAML)
 
-> Organization: 가짜연구소 (Pseudo Lab)
-> Editor: 이홍규
-> 강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_lecture3.pdf)
-> 강의 영상: [Youtube](https://www.youtube.com/watch?v=2a_LSOIlHLI&list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&index=4)
+> Organization: 가짜연구소 (Pseudo Lab)<br/>
+> Editor: [이홍규](https://github.com/howsmyanimeprofilepicture)<br/>
+> 강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_lecture3.pdf)<br/>
+> 강의 영상: [Youtube](https://www.youtube.com/watch?v=2a_LSOIlHLI&list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&index=4)<br/>
 
 ## 알고리즘 오버뷰
 

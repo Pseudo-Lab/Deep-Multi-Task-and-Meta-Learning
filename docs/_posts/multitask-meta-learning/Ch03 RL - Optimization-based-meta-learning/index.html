@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4 Lecture. Optimization-based Meta Learning (MAML) &#8212; 멀티태스크/메타러닝 초읽기</title>
+    <title>Lecture 4. Optimization-based Meta Learning (MAML) &#8212; 멀티태스크/메타러닝 초읽기</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned" href="../Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html" />
+    <link rel="next" title="Lecture 6. Non-Parametric Few-Shot Learning" href="../Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html" />
     <link rel="prev" title="인트로" href="../../../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -123,22 +123,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   4 Lecture. Optimization-based Meta Learning (MAML)
+   Lecture 4. Optimization-based Meta Learning (MAML)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html">
+   Lecture 6. Non-Parametric Few-Shot Learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html">
-   9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+   Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch10%20RL%20-%20%20Model-Based%20RL.html">
-   10 Lecture. Model-Based RL
+   Lecture 10. Model-Based RL
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html">
-   11 Lecture. Meta RL: Adaptable Models &amp; Policies
+   Lecture 11. Meta RL: Adaptable Models &amp; Policies
   </a>
  </li>
 </ul>
@@ -231,7 +236,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning/issues/new?title=Issue%20on%20page%20%2F_posts/multitask-meta-learning/Ch03RL - Optimization-based-meta-learning/index.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning/issues/new?title=Issue%20on%20page%20%2F_posts/multitask-meta-learning/Ch03 RL - Optimization-based-meta-learning/index.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -259,7 +264,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/_posts/multitask-meta-learning/Ch03RL - Optimization-based-meta-learning/index.md"
+        <a href="../../../_sources/_posts/multitask-meta-learning/Ch03 RL - Optimization-based-meta-learning/index.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -363,7 +368,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>4 Lecture. Optimization-based Meta Learning (MAML)</h1>
+                <h1>Lecture 4. Optimization-based Meta Learning (MAML)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -419,13 +424,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="lecture-optimization-based-meta-learning-maml">
-<h1>4 Lecture. Optimization-based Meta Learning (MAML)<a class="headerlink" href="#lecture-optimization-based-meta-learning-maml" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-4-optimization-based-meta-learning-maml">
+<h1>Lecture 4. Optimization-based Meta Learning (MAML)<a class="headerlink" href="#lecture-4-optimization-based-meta-learning-maml" title="Permalink to this headline">#</a></h1>
 <blockquote>
-<div><p>Organization: 가짜연구소 (Pseudo Lab)
-Editor: 이홍규
-강의 자료: <a class="reference external" href="http://cs330.stanford.edu/fall2020/slides/cs330_lecture3.pdf">CS330 2020 Fall</a>
-강의 영상: <a class="reference external" href="https://www.youtube.com/watch?v=2a_LSOIlHLI&amp;list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;index=4">Youtube</a></p>
+<div><p>Organization: 가짜연구소 (Pseudo Lab)<br/>
+Editor: <a class="reference external" href="https://github.com/howsmyanimeprofilepicture">이홍규</a><br/>
+강의 자료: <a class="reference external" href="http://cs330.stanford.edu/fall2020/slides/cs330_lecture3.pdf">CS330 2020 Fall</a><br/>
+강의 영상: <a class="reference external" href="https://www.youtube.com/watch?v=2a_LSOIlHLI&amp;list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;index=4">Youtube</a><br/></p>
 </div></blockquote>
 <section id="id1">
 <h2>알고리즘 오버뷰<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
@@ -561,7 +566,7 @@ f(\mathbf x_i^\text{qry}, \phi_i)\right)\)</span>로 취급합니다. 사실 구
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./_posts/multitask-meta-learning/Ch03RL - Optimization-based-meta-learning"
+            path: "./_posts/multitask-meta-learning/Ch03 RL - Optimization-based-meta-learning"
         },
         predefinedOutput: true
     }
@@ -582,10 +587,10 @@ f(\mathbf x_i^\text{qry}, \phi_i)\right)\)</span>로 취급합니다. 사실 구
             <p class="prev-next-title">인트로</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html" title="next page">
+    <a class='right-next' id="next-link" href="../Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned</p>
+        <p class="prev-next-title">Lecture 6. Non-Parametric Few-Shot Learning</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

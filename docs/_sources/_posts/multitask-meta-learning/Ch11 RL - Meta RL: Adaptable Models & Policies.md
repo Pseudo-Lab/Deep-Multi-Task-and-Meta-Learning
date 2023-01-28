@@ -1,4 +1,4 @@
-# 11 Lecture. Meta RL: Adaptable Models & Policies
+# Lecture 11. Meta RL: Adaptable Models & Policies
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [민예린 (Yerin Min)](https://www.linkedin.com/in/yerinmin/)  

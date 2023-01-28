@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned &#8212; 멀티태스크/메타러닝 초읽기</title>
+    <title>Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned &#8212; 멀티태스크/메타러닝 초읽기</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="10 Lecture. Model-Based RL" href="Ch10%20RL%20-%20%20Model-Based%20RL.html" />
-    <link rel="prev" title="4 Lecture. Optimization-based Meta Learning (MAML)" href="Ch03RL%20-%20Optimization-based-meta-learning/index.html" />
+    <link rel="next" title="Lecture 10. Model-Based RL" href="Ch10%20RL%20-%20%20Model-Based%20RL.html" />
+    <link rel="prev" title="Lecture 6. Non-Parametric Few-Shot Learning" href="Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -120,23 +120,28 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch03RL%20-%20Optimization-based-meta-learning/index.html">
-   4 Lecture. Optimization-based Meta Learning (MAML)
+  <a class="reference internal" href="Ch03%20RL%20-%20Optimization-based-meta-learning/index.html">
+   Lecture 4. Optimization-based Meta Learning (MAML)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html">
+   Lecture 6. Non-Parametric Few-Shot Learning
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+   Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Ch10%20RL%20-%20%20Model-Based%20RL.html">
-   10 Lecture. Model-Based RL
+   Lecture 10. Model-Based RL
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html">
-   11 Lecture. Meta RL: Adaptable Models &amp; Policies
+   Lecture 11. Meta RL: Adaptable Models &amp; Policies
   </a>
  </li>
 </ul>
@@ -318,7 +323,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+   Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -335,7 +340,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned</h1>
+                <h1>Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -347,7 +352,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+   Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -365,8 +370,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="lecture-reinforcemeht-learning-a-primer-multi-task-goal-conditioned">
-<h1>9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned<a class="headerlink" href="#lecture-reinforcemeht-learning-a-primer-multi-task-goal-conditioned" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-9-reinforcemeht-learning-a-primer-multi-task-goal-conditioned">
+<h1>Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned<a class="headerlink" href="#lecture-9-reinforcemeht-learning-a-primer-multi-task-goal-conditioned" title="Permalink to this headline">#</a></h1>
 <blockquote>
 <div><p>Organization: 가짜연구소 (Pseudo Lab)<br />
 Editor: <a class="reference external" href="https://github.com/SeungeonBaek">백승언 (Seungeon Baek)</a><br />
@@ -830,17 +835,17 @@ action이 a_1일 때, Q^pi(s_t,a_t)는?! 넵 ㅎ 0이라고 합니다. a_2도 0�
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch03RL%20-%20Optimization-based-meta-learning/index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch06%20RL%20-%20Non_Parametric_Few_Shot_Learning.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">4 Lecture. Optimization-based Meta Learning (MAML)</p>
+            <p class="prev-next-title">Lecture 6. Non-Parametric Few-Shot Learning</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Ch10%20RL%20-%20%20Model-Based%20RL.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">10 Lecture. Model-Based RL</p>
+        <p class="prev-next-title">Lecture 10. Model-Based RL</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

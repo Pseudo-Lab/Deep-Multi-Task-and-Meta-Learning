@@ -1,10 +1,9 @@
-# 10 Lecture. Model-Based RL
+# Lecture 10. Model-Based RL
 
 >Organization: 가짜연구소 (Pseudo Lab)  
->Editor: 이홍규<br/>
+>Editor: [이홍규](https://github.com/howsmyanimeprofilepicture)<br/>
 >강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_mbrl_2020.pdf)  
 >강의 영상: [Youtube](https://youtu.be/LGhVQ3NB9h4)
-<br/><br/>
 ## 개요
 
 * Model-based RL의 주된 모티베이션은 **충분한 양의 데이터 확보**입니다.

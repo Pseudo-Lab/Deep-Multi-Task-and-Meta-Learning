@@ -1,4 +1,4 @@
-# 9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+# Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [백승언 (Seungeon Baek)](https://github.com/SeungeonBaek)  
@@ -10,7 +10,7 @@
  안녕하세요, Nota AI에서 강화학습 연구원으로 재직중인 백승언 입니다. 5기에 이어, 6기 아카데믹 러너에 참여하여, 열정 있는 분들과 CS330 스터디를 이어갈 수 있어 너무 감사한 것 같습니다.
 
 두 번 연속 스터디를 주최하고 이끌어가 주시는 민예린님과, 한 명의 이탈자도 없이 같이 참여해주시는 스터디원 분들 모두, 이 자리를 빌어, 다시 한 번 감사드립니다.
- 
+
 사다리 타기에 져서, 스터디의 시작이자 CS330의 RL 파트의 시작을 맡게 되어 어느정도 부담도 되지만, 열심히 강의를 리뷰 해보도록 하겠습니다!
 
 ![slide 1](materials/Lec9_material/material_figs/1.PNG "Slide1")
@@ -73,7 +73,7 @@ Karol Hausman 교수님은 폴란드 출신이라고 합니다. 고전적인 로
  a_t - action at the time step t  
  \pi_\theta(a_t|o_t) - probability of action a_t given o_t  
  \pi_\theta(a_t|s_t) - probability of action a_t given s_t  
- 
+
 이때, s_t에 대한 정책은, fully observable한 상황에서만 얻을 수 있다는 언급을 하고, 다음 장에서 이를 설명하고자 하였습니다.
 
 ![slide 8](materials/Lec9_material/material_figs/15.PNG "Slide8")
@@ -497,7 +497,8 @@ task별로 달라지는 reward에 대해서 relabeling을 해주는 점이 goal-
 
  * 채지훈
     - goal-state가 여러 개가 존재한다면 여러 개의 goal-state에 의해서 multi-task 문제로 표현되는 걸까요?
-  
+    
+    
     ![Q&A Image 5](materials/Lec9_material/QnAfigs/5.PNG)  
-
+    
     + 승언 : (추가) 흠.. 강의를 다시 보니, task identifier z_i의 종류 중 하나로 goal state를 사용한 것을 보면 multi-goal이면 multi-task인 것 같기도 하네요ㅠ 도움!!

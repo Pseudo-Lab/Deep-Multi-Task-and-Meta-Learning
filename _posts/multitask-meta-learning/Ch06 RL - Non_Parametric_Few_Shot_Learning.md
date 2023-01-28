@@ -1,12 +1,9 @@
-# 9 Lecture. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned
+# Lecture 6. Non-Parametric Few-Shot Learning
 
 >Organization: 가짜연구소 (Pseudo Lab)  
 >Editor: [Bumjin Park](https://github.com/fxnnxc)  
->강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_rl_gc_mt_karol.pdf)  
+>강의 자료: [CS330 2020 Fall](http://cs330.stanford.edu/fall2020/slides/cs330_nonparametric_2020.pdf)  
 >강의 영상: [Youtube](https://www.youtube.com/watch?v=ARQI7USUo5w&list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&index=5)  
-> 강의 보조 자료: [HER](https://arxiv.org/abs/1703.05175)    
-
-
 
 안녕하세요, AI대학원 석사과정 박범진입니다. 다양한 분들과 열심히 배우고 정보를 공유하고 싶은 마음에 스터디에 참여하였습니다. <br/>
 부족한 점도 많지만, 열심히 준비하여 많은 분들께 도움이 되었으면 하는 바람입니다. 감사합니다. 
