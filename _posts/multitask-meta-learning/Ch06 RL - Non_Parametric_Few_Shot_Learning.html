@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lecture 6. Non-Parametric Few-Shot Learning &#8212; 멀티태스크/메타러닝 초읽기</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/multitask-meta-learning/Ch06 RL - Non_Parametric_Few_Shot_Learning';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned" href="Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html" />
+    <link rel="prev" title="Lecture 4. Optimization-based Meta Learning (MAML)" href="Ch03%20RL%20-%20Optimization-based-meta-learning/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/PseudoLab_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/PseudoLab_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    인트로
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Multi-Task &amp; Meta Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Ch03%20RL%20-%20Optimization-based-meta-learning/index.html">Lecture 4. Optimization-based Meta Learning (MAML)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lecture 6. Non-Parametric Few-Shot Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html">Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ch10%20RL%20-%20%20Model-Based%20RL.html">Lecture 10. Model-Based RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch11%20RL%20-%20Meta%20RL%3A%20Adaptable%20Models%20%26%20Policies.html">Lecture 11. Meta RL: Adaptable Models &amp; Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch12%20RL%20-%20MetaRL%3ALearning%20to%20explore/index.html">Lecture 12. Meta-RL: Learning to explore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch15%20RL%20-%20Lifelong%20Learning.html">Lecture 15. Lifelong Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Deep-Multi-Task-and-Meta-Learning/issues/new?title=Issue%20on%20page%20%2F_posts/multitask-meta-learning/Ch06 RL - Non_Parametric_Few_Shot_Learning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_posts/multitask-meta-learning/Ch06 RL - Non_Parametric_Few_Shot_Learning.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lecture 6. Non-Parametric Few-Shot Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric"><strong>Metric 기반 메타러닝</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-based-meta-learning-algorithms"><strong>Metric-based Meta Learning Algorithms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match-network"><strong>🔖 Match Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-augmented-neural-network">🔖<strong>Memory Augmented Neural Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prototype-network">🔖<strong>Prototype Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-network">🔖<strong>Relation Network</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lecture-6-non-parametric-few-shot-learning">
+<h1>Lecture 6. Non-Parametric Few-Shot Learning<a class="headerlink" href="#lecture-6-non-parametric-few-shot-learning" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>Organization: 가짜연구소 (Pseudo Lab)<br />
+Editor: <a class="reference external" href="https://github.com/fxnnxc">Bumjin Park</a><br />
+강의 자료: <a class="reference external" href="http://cs330.stanford.edu/fall2020/slides/cs330_nonparametric_2020.pdf">CS330 2020 Fall</a><br />
+강의 영상: <a class="reference external" href="https://www.youtube.com/watch?v=ARQI7USUo5w&amp;list=PLoROMvodv4rOxuwpC_raecBCd5Jf54lEa&amp;index=5">Youtube</a></p>
+</div></blockquote>
+<p>안녕하세요, AI대학원 석사과정 박범진입니다. 다양한 분들과 열심히 배우고 정보를 공유하고 싶은 마음에 스터디에 참여하였습니다. <br/>
+부족한 점도 많지만, 열심히 준비하여 많은 분들께 도움이 되었으면 하는 바람입니다. 감사합니다.</p>
+<section id="metric">
+<h2><strong>Metric 기반 메타러닝</strong><a class="headerlink" href="#metric" title="Permalink to this heading">#</a></h2>
+<p>메타러닝은 크게 Gradient 기반과 Metric 기반으로 나뉩니다.  포스팅에서는 Metric 기반 메타러닝 알고리즘을 알아보겠습니다. 여기서 말하는 Metric이란 데이터 사이의 거리는 재는 것을 나타내는 것으로 거리가 가깝다면 비슷한 클래스, 반대로 멀리 떨어진 경우 다른 클래스로 분류하고자 합니다. 데이터 클래스에 대해서 Metric은 🔖 <strong>Intra-Class</strong> 와 🔖 <strong>Inter-Class</strong> 두 가지로 고려 될 수 있습니다.</p>
+<ul class="simple">
+<li><p><strong>🔖 inter-Class</strong> : <strong>클래스 끼리</strong> <strong>거리 (붉은색)</strong></p></li>
+<li><p><strong>🔖 intra-Class : 클래스 내부 데이터 사이의 거리 (파란색)</strong></p></li>
+</ul>
+<p><img alt="slide" src="../../_images/fig1.png" /></p>
+<p>Metric 기반 메타러닝에서 중요한 것은 주어지는 적은 양의 데이터에 대해서 🔖<strong>Inter-class</strong> 를 잘 구분하는 것입니다. 이를 위해서 클래스에 대해서 데이터를 저차원의 공간으로 맵핑시키도록 학습하고자 합니다. 아래 그림과 같이 🔖<strong>Support 데이터</strong>가 있다면, 🔖<strong>Query 데이터</strong>는 Support의 클래스 중에서 제일 가까운 클래스로 예측하게 됩니다. 이 때 사용되는 🔖<strong>Encoder</strong> 는 보통 파라미터 Sharing 모델을 사용합니다.</p>
+<p><img alt="slide" src="../../_images/fig2.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="metric-based-meta-learning-algorithms">
+<h2><strong>Metric-based Meta Learning Algorithms</strong><a class="headerlink" href="#metric-based-meta-learning-algorithms" title="Permalink to this heading">#</a></h2>
+<p>Metric 기반 알고리즘 <strong>4가지를 살펴보겠습니다</strong>. (물론 종류는 더 있습니다)</p>
+<ul class="simple">
+<li><p><strong>🚀 Matching Network (MN) :</strong> 클래스 별 샘플 1개의 Support 데이터 넣고, Query 넣고 비교</p></li>
+<li><p><strong>🚀 Memory Augmented Neural Networks</strong> : LSTM에 Sequential 하게 (X,y)를 넣고, Query x에 대해서 예측</p></li>
+<li><p>🚀<strong>Prototypical Networks (ProtoNet)</strong>  : 동일한 클래스에 해당하는 샘플 여러개를 평균내서 비교</p></li>
+<li><p>🚀<strong>Relation Network (RN) :</strong> 동일한 클래스에 해당하는 샘플들을 평균내고, Query랑 Concat해서 Score 예측</p></li>
+</ul>
+<hr class="docutils" />
+<section id="match-network">
+<h3><strong>🔖 Match Network</strong><a class="headerlink" href="#match-network" title="Permalink to this heading">#</a></h3>
+<p>Match Network 의 기본은 하나의 샘플에 대해서 비슷한 정도를 측정하는 것을 목표로 합니다. 한 가지 문제는 여러 개의 샘플이 있을 때 어떻게 해야 하는지 나와있지 않습니다. 왜냐하면 원래 논문이 🔖 <strong>One-shot learning</strong> (하나의 샘플을 주고 클래스 예측)을 목표로 하기 때문입니다. <a class="reference external" href="https://arxiv.org/abs/1606.04080">논문링크 : Matching Networks for One Shot Learning, Vinyals et al, 2016</a></p>
+<p><img alt="slide" src="../../_images/fig3.png" /></p>
+<p>해당 모델을 One-shot 에서 K-shot 으로 일반화한 모델이 ProtoNet이니, 더 자세한 내용은 밑에 ProtoNet에서 설명하겠습니다.</p>
+</section>
+<hr class="docutils" />
+<section id="memory-augmented-neural-network">
+<h3>🔖<strong>Memory Augmented Neural Network</strong><a class="headerlink" href="#memory-augmented-neural-network" title="Permalink to this heading">#</a></h3>
+<p>Main Idea는 🔖 <strong>Recurrent Neural Network</strong> 로 정보를 저장하는 것 입니다. 🔖 <strong>Support Data</strong>에 대해서는 클래스 Y 를 같이 입력으로 주고, 🔖 <strong>Query</strong>에 대해서는 Mask 값을 주고 클래스에 대해서 확률을 예측하는 방식으로 모델을 학습합니다.</p>
+<p><img alt="slide" src="../../_images/fig4.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="prototype-network">
+<h3>🔖<strong>Prototype Network</strong><a class="headerlink" href="#prototype-network" title="Permalink to this heading">#</a></h3>
+<p>Matching Network 가 One-shot Leanring 을 목표로 했다면, ProtoNet은 🔖 <strong>K-shot Learning</strong> 을 목표로 합니다. K-shot Learning 은 각 클래스 별로 K개의 샘플을 주는 것 입니다. 아래 그림과 같이 Support 데이터에 대해서 Prototype (프로토타입 = 대표샘플) 을 만들어서 Query 와 비교하는 방식입니다.</p>
+<p><img alt="slide" src="../../_images/fig5.png" /></p>
+<p>그림에서 클래스 별 Prototype <span class="math notranslate nohighlight">\(c\_n\)</span> 은 클래스 별로 샘플을 평균내서 계산됩니다.</p>
+<p>이렇게 계산된 클래스별 Prototype은 이제 Query 데이터와 🔖 <strong>Softmax</strong>를 통해서 확률값으로 계산됩니다.</p>
+<p>가장 높은 확률을 가지는 클래스를 선택하게 됩니다. 레이블 (0,1,2,3) 등과 같은 값은 필요가 없습니다.</p>
+<p>Prototype 위치에 대한 하는 값을 반환하면 되기 때문입니다.</p>
+<p><strong>아래 코드는 Pytorch Implementation 입니다.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># deep learning encoding </span>
+<span class="n">support_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">support_x</span><span class="p">)</span>
+<span class="n">query_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">query_x</span><span class="p">)</span>
+
+<span class="c1"># check the number of classes</span>
+<span class="n">unique_classes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">support_y</span><span class="p">)</span>
+
+<span class="n">class_samples</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="n">query_y_clone</span> <span class="o">=</span> <span class="n">query_y</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+
+<span class="c1"># select the samples for each class</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">class_index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">):</span>
+    <span class="n">class_sample_indices</span> <span class="o">=</span> <span class="n">support_y</span> <span class="o">==</span> <span class="n">class_index</span>
+    <span class="n">support_class_x</span> <span class="o">=</span> <span class="n">support_x</span><span class="p">[</span><span class="n">class_sample_indices</span><span class="p">]</span>
+    <span class="n">support_class_y</span> <span class="o">=</span> <span class="n">support_y</span><span class="p">[</span><span class="n">class_sample_indices</span><span class="p">]</span>
+    <span class="n">query_y</span><span class="p">[</span><span class="n">query_y_clone</span> <span class="o">==</span> <span class="n">class_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
+    <span class="n">class_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">support_class_x</span><span class="p">)</span>
+
+<span class="c1"># mean pooling to make prototypes </span>
+<span class="n">prototypes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">batch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">batch</span> <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">class_samples</span><span class="p">])</span>
+<span class="n">similarity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_function</span><span class="p">(</span><span class="n">query_x</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">similarity</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">query_y</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">query_y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">query_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="relation-network">
+<h3>🔖<strong>Relation Network</strong><a class="headerlink" href="#relation-network" title="Permalink to this heading">#</a></h3>
+<p>ProtoNet과 다른 점은, Softmax 로 계산하기보다 Prototype 과 Cocat을 하여 Score를 계산하는데 있습니다. 한 가지 장점은 Prototype과 Query 의 Representation 을 한단계 더 해석할 수 있다는 점 입니다. (ProtoNet 은 바로 확률값으로 나오는 차이점)</p>
+<p><img alt="slide" src="../../_images/fig6.png" /></p>
+<p>해당 그림과 같이 Query Embedding은 Prototype과 붙여서 Score값을 마지막에 내보내게 되고, 이를 기반으로 가장 높은 클래스가 선택됩니다. Metric 기반 Meta Learnin 은 데이터의 표현공간에 대한 차이를 기반으로 예측한다는 점에서 🔖 <strong>Self-Supervised Learning</strong>이나 🔖 <strong>Pretrained Model</strong> 을 결합하여 사용하는 경우, 월등히 높은 성능을 내게 됩니다. 🔖 <strong>Metric-based Meta Learning</strong> 알고리즘의 요점은 샘플을 비교하는 방식을 논의하는데 있습니다.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_posts/multitask-meta-learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ch03%20RL%20-%20Optimization-based-meta-learning/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lecture 4. Optimization-based Meta Learning (MAML)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Ch09%20RL%20-%20A%20Primer%2C%20Multi-Task%2C%20Goal-Conditioned.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture 9. Reinforcemeht Learning : A Primer, Multi-Task, Goal-Conditioned</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric"><strong>Metric 기반 메타러닝</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-based-meta-learning-algorithms"><strong>Metric-based Meta Learning Algorithms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match-network"><strong>🔖 Match Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-augmented-neural-network">🔖<strong>Memory Augmented Neural Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prototype-network">🔖<strong>Prototype Network</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-network">🔖<strong>Relation Network</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 가짜연구소 멀티태스크/메타러닝 초읽기 팀
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
