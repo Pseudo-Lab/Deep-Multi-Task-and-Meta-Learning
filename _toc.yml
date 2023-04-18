@@ -7,6 +7,9 @@ parts:
 - caption: Deep Multi-Task & Meta Learning
   chapters:
   - glob: _posts/multitask-meta-learning/**
+- caption: Model-based RL
+  chapters:
+  - glob: _posts/model-based-rl/** 
 - caption: Continual Learning
   chapters:
   - glob: _posts/continual-learning/**
